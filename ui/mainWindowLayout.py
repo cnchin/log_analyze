@@ -17,6 +17,12 @@ class Ui_MainWindow(object):
         MainWindow.resize(1080, 720)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(410, 370, 75, 23))
+        self.pushButton.setObjectName("pushButton")
+        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser.setGeometry(QtCore.QRect(200, 110, 581, 231))
+        self.textBrowser.setObjectName("textBrowser")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1080, 23))
@@ -53,6 +59,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton.setText(_translate("MainWindow", "点他"))
         self.menu.setTitle(_translate("MainWindow", "文件"))
         self.menu_3.setTitle(_translate("MainWindow", "打开"))
         self.menu_2.setTitle(_translate("MainWindow", "关于"))
