@@ -1,7 +1,7 @@
 # 导入库
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from ui.mainWindowLayout import Ui_MainWindow
 import inspect
 
@@ -13,15 +13,37 @@ class UiMainWindow(Ui_MainWindow, QMainWindow):
         print("UiMainWindow init success")
         self.pushButton.clicked.connect(self.display)
         self.open_file.triggered.connect(self.open_file_slot)
+        self.cat_version.triggered.connect(self.cat_version_slot)
+        self.cat_author.triggered.connect(self.cat_author_slot)
 
-    def display(self):
+    def display(self):  # test operation
         print("Func={0}() start".format(inspect.stack()[0][3]))
         self.textBrowser.setText("hello world")
 
-    def open_file_slot(self):
+    def open_file_slot(self):  # 打开 文件，并将内容显示到text控件上
         print("Func={0}() start".format(inspect.stack()[0][3]))
-        path = QFileDialog.getOpenFileName(self, "open")
-        print(path)
+        filePath = QFileDialog.getOpenFileName(self)
+        filePath = str(filePath[0])
+        print(filePath)
+        try:
+            with open(filePath, "r") as f:
+                readlines = f.readlines()
+            for readline in readlines:
+                self.textBrowser.append(readline)
+        except Exception:
+            print("open file error")
+
+    def cat_version_slot(self):  # 查看版本信息
+        QMessageBox.information(
+            self,
+            '版本信息',
+            'version = 0.01')
+
+    def cat_author_slot(self):  # 查看作者信息
+        QMessageBox.information(
+            self,
+            '作者信息',
+            'author = chin')
 
 
 if __name__ == '__main__':
